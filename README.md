@@ -1,18 +1,20 @@
 # aks-brigadedemo
 
-Microsoft is dedicated to contribute to the opensource community, for Kubernetes development we provide a holy trinity: Helm, Draft and Brigade. Originally conceived by the people from Deis it is now part of the Kubernetes dev eco system.
+Microsoft is dedicated to contributing to the opensource community, for Kubernetes development Microsoft provides the holy trinity: Helm, Draft and Brigade. Originally conceived by the people from Deis it is now part of the Kubernetes dev eco system.
 
 Brigade makes your Kubernetes cluster suitable for Events and Job Scheduling via a framework that makes it easy to script and pipeline certain tasks. Hereby Brigade utilizes the out of the box features from Kubernetes like Secrets, Events and Jobs in combination with an API based on Javascript.
 
 Documentation is available here: https://github.com/Azure/brigade
-I have used the gateway with this as template: http://technosophos.com/2018/04/23/building-brigade-gateways-the-easy-way.html
+I have used the gateway with this as template: http://technosophos.com/2018/04/23/building-brigade-gateways-the-easy-way.html ...
 
+## Pre requisites
 In order to run this demo you should have the following:
 - A configured AKS cluster
 - A client which has the following CLI: azure-cli, kubectl and brig cli; for brig cli visit: https://github.com/Azure/brigade/tree/master/brig
 - A service principal
-- A configured ACI plugin, instructions are in the aci-connector folder
-
+- A configured ACI plugin, instructions below
+ 
+## Flow
 Brigade scripts are triggered with an Event that can come from an entrypoint...this entrypoint is refered to as a gateway. In this demo we have a gateway that is exposed as a rest service. Once this webhook is called the following actions will be triggered:
 - the webhook will refer to an existing project, this project is available in Kubernetes as a Secret of  type: brigade.sh/project
 - this project will define the runtime in where the job will execute
@@ -25,3 +27,11 @@ Brigade scripts are triggered with an Event that can come from an entrypoint...t
 - the environment variables used in this job are configured in the project secret
 - the job with the event name DEPLOY will deploy 1 busybox instance
 - the job with the event name SCALE will scale the busybox instance an X amount of times...In this demo actual nodes are being spun up, these nodes are Azure Container Instances, I will demonstrate that by typing az container list -o table, after and before the scale event. 
+
+## Setup instructions
+
+- Install Brigade
+- Install Brigade Gateway
+- Install Brigade Projects
+- Install ACI connector
+- Install Kashti
