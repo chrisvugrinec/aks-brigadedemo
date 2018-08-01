@@ -33,6 +33,7 @@ Brigade scripts are triggered with an Event that can come from an entrypoint...t
 - Install Brigade
   - helm init
   - helm repo add brigade https://azure.github.io/brigade
+  - helm install -n brigade brigade/brigade
 - Install and test Brigade helloworld Project
   - cd brigade-project-helloworld
   - helm install -n bproject-helloworld brigade/brigade-project -f myvalues.yaml 
