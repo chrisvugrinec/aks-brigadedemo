@@ -33,7 +33,37 @@ Brigade scripts are triggered with an Event that can come from an entrypoint...t
 - Install Brigade
   - helm init
   - helm repo add brigade https://azure.github.io/brigade
-- Install Brigade Gateway
-- Install Brigade Projects
-- Install ACI connector
+- Install and test Brigade helloworld Project
+  - cd brigade-project-helloworld
+  - helm install -n bproject-helloworld brigade/brigade-project -f myvalues.yaml 
+  - brig project list
+  - brig run -f helloworld.js brigade/helloworld
+  - check logs
 - Install Kashti
+  - cd kashti
+  - kubectl get svc ; get the ip number from the API server  (port 7745)
+  - edit charts/kashit/values.yaml....and change the IP addres of the API server with the current addres
+  - helm install -n kashti ./charts/kashti
+  - brig proxy
+- Install ACI connector
+  - az aks install-connector -g YOUR_RG_NAME -n YOUR_AKS_NAME --connector-name myaciconnector  
+  - check your installation with the busybox
+    - cd busybox
+    - kubectl create -f busybox.yaml
+    - check if ACI instances have been created : az container list -o table
+    - if you have problems...configure your ACR and make sure that you have the secret of your ACR in kubernetes as draft-pullsecret..take a peek in the scripts folder
+- Install Brigade Gateway
+  - cd brigade-gateway
+  - draft up
+- Install Brigade docker Project
+  - cd brigade-project-docker
+  - edit the values in the values.yaml file, you should know the tenant, sp and password
+  - helm install -n bproject-dockerdemo brigade/brigade-project -f myvalues.yaml
+  - brig project list
+  - test it:
+    - in the gateway...do draft connect (use the dynamic port)
+    - curl -XPOST http://localhost:YOUR_DYNAMIC_PORT/v1/webhook/deploy/YOUR_BRIGADE_ID   (get your brigade id with brig project list)
+    - check the pods:  kubectl get pods
+  - scale the deployment with the following command:
+    - curl -XPOST http://localhost:YOUR_DYNAMIC_PORT/v1/webhook/scale/YOUR_BRIGADE_ID/ YOUR DESIRED SIZE ...for eg 3
+    - check your pods or kashti for the result

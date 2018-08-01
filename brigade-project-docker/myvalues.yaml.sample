@@ -1,0 +1,20 @@
+# Name of the project, in the form "user/project"
+project: "brigade/aks-dockerexample"
+
+# Domain/Org/Project
+repository: "https://github.com/chrisvugrinec/brigade-aks-dockerexample"
+
+cloneURL: "https://github.com/chrisvugrinec/brigade-aks-dockerexample"
+
+secrets:
+  username: http://YOUR_SERVICEPRINCIPLE
+  tenant: YOUR_TENANTID
+  password: YOUR_PASSWORD
+
+vcsSidecar: "deis/git-sidecar:latest"
+allowPrivilegedJobs: "true"
+
+# Kubernetes-specific configuration options.
+kubernetes:
+
+worker:

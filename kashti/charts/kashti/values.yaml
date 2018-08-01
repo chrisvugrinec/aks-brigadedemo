@@ -1,6 +1,5 @@
 brigade:
-  apiServer: "http://10.0.77.76:7745"
-
+  apiServer: "http://10.0.24.161:7745"
 replicaCount: 1
 image:
   repository: deis/kashti
