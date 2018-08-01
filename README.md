@@ -31,6 +31,8 @@ Brigade scripts are triggered with an Event that can come from an entrypoint...t
 ## Setup instructions
 
 - Install Brigade
+  - helm init
+  - helm repo add brigade https://azure.github.io/brigade
 - Install Brigade Gateway
 - Install Brigade Projects
 - Install ACI connector
